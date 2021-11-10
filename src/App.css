@@ -1,7 +1,16 @@
 .App {
-  text-align: center;
+
 }
 
+li {
+  list-style: none;
+  border-bottom: solid 2px black;
+  width: 150px;
+}
+
+p {
+  overflow: visible;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

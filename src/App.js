@@ -1,23 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import {useEffect, useState} from "react";
+import Contacts from "./Contact";
+
+const API_URL = "https://randomuser.me/api?results=25"
 
 function App() {
+    const [addressBook, setAddressBook] = useState([])
+
+    useEffect(() => {
+        console.log("I mounted")
+
+        fetch(API_URL)
+            .then((response) => response.json())
+            .then((data) => setAddressBook(data.results))
+    }, [])
+
+    useEffect(() => {
+        console.log(addressBook)
+    }, [addressBook])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <ul>
+            {addressBook.map((contact, index) => {
+                return (<Contacts contact={contact} index={index}/>)
+            })}
+        </ul>
     </div>
   );
 }
